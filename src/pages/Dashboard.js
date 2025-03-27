@@ -26,7 +26,6 @@ import {
   Description as DescriptionIcon,
 } from '@mui/icons-material';
 import { useAuth } from '../contexts/AuthContext';
-import AuthDebug from '../components/AuthDebug';
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -102,7 +101,6 @@ const Dashboard = () => {
       </Box>
 
       {/* Temporary Auth Debug Panel */}
-      {/* <AuthDebug /> */}
 
       {error && (
         <Typography color="error" sx={{ mb: 2 }}>
