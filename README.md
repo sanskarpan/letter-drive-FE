@@ -1,70 +1,165 @@
-# Getting Started with Create React App
+# Letter Drive App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack web application that allows users to create and edit text-based letters and save them to Google Drive.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Google Authentication
+- Rich Text Editor for creating and editing letters
+- Save letters locally and to Google Drive
+- Admin dashboard for user management
+- Responsive design
 
-### `npm start`
+## Technology Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Frontend**: React.js with Material UI
+- **Backend**: Node.js with Express
+- **Database**: MongoDB
+- **Authentication**: Google OAuth
+- **Storage**: Google Drive API
+- **Deployment**: Vercel (Frontend) and Render/Heroku (Backend)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js and npm installed
+- MongoDB installed locally or MongoDB Atlas account
+- Google Cloud Platform account with OAuth 2.0 credentials and Google Drive API enabled
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Backend Setup
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone the repository
+```
+git clone https://github.com/sanskarpan/letter-drive-app.git
+cd letter-drive-app/server
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Install dependencies
+```
+npm install
+```
 
-### `npm run eject`
+3. Create a `.env` file in the server directory with the following variables:
+```
+PORT=5000
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+GOOGLE_CALLBACK_URL = https://letter-drive-api.onrender.com/api/auth/google/callback
+CLIENT_URL=http://localhost:3000
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. Start the server
+```
+npm run dev
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Frontend Setup
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Navigate to the client directory
+```
+cd ../client
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+2. Install dependencies
+```
+npm install
+```
 
-## Learn More
+3. Create a `.env` file in the client directory with the following variables:
+```
+REACT_APP_API_URL=http://localhost:5000
+REACT_APP_GOOGLE_CLIENT_ID=your_google_client_id
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+4. Start the client
+```
+npm start
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Project Structure
 
-### Code Splitting
+```
+letter-drive-app/
+├── client/                  # Frontend React application
+│   ├── public/              # Public assets
+│   ├── src/                 # Source files
+│   │   ├── components/      # Reusable components
+│   │   ├── contexts/        # React contexts
+│   │   ├── pages/           # Page components
+│   │   ├── App.js           # Main App component
+│   │   └── index.js         # Entry point
+│   ├── .env                 # Environment variables
+│   └── package.json         # Dependencies and scripts
+├── server/                  # Backend Express application
+│   ├── config/              # Configuration files
+│   ├── models/              # Database models
+│   ├── routes/              # API routes
+│   ├── utils/               # Utility functions
+│   ├── .env                 # Environment variables
+│   ├── index.js             # Entry point
+│   └── package.json         # Dependencies and scripts
+└── README.md                # Project documentation
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## API Endpoints
 
-### Analyzing the Bundle Size
+### Authentication
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- `GET /api/auth/google`: Google OAuth login
+- `GET /api/auth/google/callback`: Google OAuth callback
+- `GET /api/auth/check`: Check if user is authenticated
+- `GET /api/auth/logout`: Logout user
 
-### Making a Progressive Web App
+### Letters
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- `GET /api/letters`: Get all letters for the logged-in user
+- `GET /api/letters/:id`: Get a single letter
+- `POST /api/letters`: Create a new letter
+- `PUT /api/letters/:id`: Update a letter
+- `DELETE /api/letters/:id`: Delete a letter
 
-### Advanced Configuration
+### Admin
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- `GET /api/admin/users`: Get all users (admin only)
+- `GET /api/admin/letters`: Get all letters (admin only)
+- `GET /api/admin/letters/:id`: Get a single letter (admin only)
+- `DELETE /api/admin/letters/:id`: Delete a letter (admin only)
+- `PUT /api/admin/users/:id/promote`: Promote a user to admin (admin only)
+- `PUT /api/admin/users/:id/demote`: Demote an admin to regular user (admin only)
 
-### Deployment
+## Google Drive Integration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+The application uses the Google Drive API to:
+1. Create a "Letters" folder in the user's Google Drive
+2. Save letters as Google Docs
+3. Update existing letters in Google Drive
 
-### `npm run build` fails to minify
+## Security Considerations
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- JWT-based authentication
+- Proper OAuth scope restrictions
+- Secure handling of API keys and tokens
+- Role-based access control
+
+## Future Enhancements
+
+- Real-time collaboration using WebSockets
+- Email notifications
+- Template system for letters
+- Export options (PDF, Word, etc.)
+- Advanced formatting options
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- Google for their OAuth and Drive APIs
+- MongoDB for the database
+- React and Material UI for the frontend framework
