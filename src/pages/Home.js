@@ -1,4 +1,3 @@
-// client/src/pages/Home.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Typography, Button, Box, Paper, Grid } from '@mui/material';

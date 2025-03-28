@@ -1,4 +1,3 @@
-// client/src/contexts/AuthContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
@@ -13,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  // Initialize auth state from local storage
+  // Initialized auth state from local storage
   useEffect(() => {
     const checkAuth = async () => {
       try {
@@ -25,7 +24,7 @@ export const AuthProvider = ({ children }) => {
           return;
         }
         
-        // Check if token is expired locally
+        // Checking here if token is expired locally
         try {
           const decoded = jwtDecode(token);
           const currentTime = Date.now() / 1000;
@@ -37,7 +36,7 @@ export const AuthProvider = ({ children }) => {
             return;
           }
           
-          // Validate token with backend
+          // Validatating token with backend
           const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/auth/check`, {
             headers: {
               Authorization: `Bearer ${token}`
@@ -114,7 +113,6 @@ export const AuthProvider = ({ children }) => {
       return true;
     } catch (error) {
       console.error('Logout error:', error);
-      // Still consider logout successful even if the API call fails
       return true;
     }
   };

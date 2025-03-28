@@ -1,4 +1,3 @@
-// client/src/pages/NotFound.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Typography, Button, Paper } from '@mui/material';

@@ -1,4 +1,3 @@
-// client/src/components/AuthDebug.js
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { Box, Typography, Button, Paper, Grid, Divider } from '@mui/material';

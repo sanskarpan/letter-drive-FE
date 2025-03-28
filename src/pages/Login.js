@@ -1,4 +1,3 @@
-// client/src/pages/Login.js
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Box, Paper, Typography, Button, Alert } from '@mui/material';

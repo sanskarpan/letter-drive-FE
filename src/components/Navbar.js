@@ -1,4 +1,3 @@
-// client/src/components/Navbar.js
 import React, { useState } from 'react';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import { 
@@ -47,7 +46,7 @@ const Navbar = () => {
     const success = await handleLogout();
     if (success) {
       console.log('Navigating to home after logout');
-      // Use window.location for a hard redirect
+      // Used window.location for a hard redirect
       window.location.href = '/';
     }
   };

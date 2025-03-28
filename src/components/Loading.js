@@ -1,4 +1,3 @@
-// client/src/components/Loading.js
 import React from 'react';
 import { Box, CircularProgress, Typography } from '@mui/material';
 
